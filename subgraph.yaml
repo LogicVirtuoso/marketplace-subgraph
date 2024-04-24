@@ -12,7 +12,7 @@ dataSources:
       startBlock: 0
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - CollectionCreated
@@ -44,7 +44,7 @@ dataSources:
       startBlock: 203669744
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - OfferEvent
@@ -67,7 +67,7 @@ dataSources:
       startBlock: 203669856
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - MediaSyncLicenseEvent

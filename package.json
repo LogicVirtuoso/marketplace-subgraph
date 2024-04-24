@@ -8,10 +8,7 @@
     "generated/schema.ts",
     "generated/*.graphql",
     "generated/**/*.ts",
-    "src",
-    "CHANGELOG.md",
-    "LICENCE",
-    "README.md"
+    "src"
   ],
   "scripts": {
     "codegen": "graph codegen",
