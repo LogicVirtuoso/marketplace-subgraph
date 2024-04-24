@@ -17,7 +17,7 @@
     "codegen": "graph codegen",
     "build": "graph build",
     "create-local": "graph create nitrility --node http://127.0.0.1:8020",
-    "deploy-local": "graph deploy nitrility --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy nitrility --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
     "remove-local": "graph remove --node http://localhost:8020/ nitrility"
   },
   "dependencies": {
