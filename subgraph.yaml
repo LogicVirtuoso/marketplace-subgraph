@@ -1,6 +1,5 @@
 specVersion: 0.0.4
-indexerHints:
-  prune: auto
+description: Marketplace Subgraph
 schema:
   file: ./schema.graphql
 dataSources:
