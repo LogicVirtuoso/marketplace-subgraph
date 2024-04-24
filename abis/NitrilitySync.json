@@ -1,0 +1,552 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "OwnableInvalidOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  { "inputs": [], "name": "ReentrancyGuardReentrantCall", "type": "error" },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "listedId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "artistId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "tokenURI",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "purchasingId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "buyerAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "purchasingPrice",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum NitrilityCommon.LicensingType",
+        "name": "licensingType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum NitrilityCommon.EventTypes",
+        "name": "eventType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum NitrilityCommon.MediaListingType",
+        "name": "mediaListingType",
+        "type": "uint8"
+      }
+    ],
+    "name": "MediaSyncLicenseEvent",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "_nitrilityFactory",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "tokenURI", "type": "string" },
+          { "internalType": "string", "name": "artistId", "type": "string" },
+          { "internalType": "uint256", "name": "listedId", "type": "uint256" },
+          {
+            "internalType": "enum NitrilityCommon.ListingType",
+            "name": "listingFormatValue",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "fPrice", "type": "uint256" },
+          { "internalType": "uint256", "name": "sPrice", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "totalSupply",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "infiniteSupply", "type": "bool" },
+          {
+            "internalType": "bool",
+            "name": "infiniteDuration",
+            "type": "bool"
+          },
+          {
+            "internalType": "enum NitrilityCommon.LicensingType",
+            "name": "licensingType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum NitrilityCommon.MediaListingType",
+            "name": "mediaListingType",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
+        ],
+        "internalType": "struct NitrilityCommon.License",
+        "name": "license",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          { "internalType": "string", "name": "artistId", "type": "string" },
+          { "internalType": "string", "name": "artistName", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "percentage",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "isAdmin", "type": "bool" },
+          {
+            "internalType": "enum NitrilityCommon.ReviewStatus",
+            "name": "status",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct NitrilityCommon.ArtistRevenue[]",
+        "name": "artistRevenues",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "mediaPurchasingId",
+        "type": "uint256"
+      }
+    ],
+    "name": "approveMediaPurchasing",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_buyerAddr", "type": "address" },
+      { "internalType": "uint256", "name": "_listedId", "type": "uint256" }
+    ],
+    "name": "fetchMediaPurchasingDataOfBuyer",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "listedId", "type": "uint256" },
+          { "internalType": "string", "name": "artistId", "type": "string" },
+          { "internalType": "string", "name": "tokenURI", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "purchasingId",
+            "type": "uint256"
+          },
+          { "internalType": "address", "name": "buyerAddr", "type": "address" },
+          {
+            "internalType": "uint256",
+            "name": "purchasingPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum NitrilityCommon.LicensingType",
+            "name": "licensingType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum NitrilityCommon.EventTypes",
+            "name": "eventType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum NitrilityCommon.MediaListingType",
+            "name": "mediaListingType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct NitrilitySync.MediaPurchasingData[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_sellerAddr", "type": "address" },
+      { "internalType": "uint256", "name": "_listedId", "type": "uint256" }
+    ],
+    "name": "fetchMediaPurchasingDataOfSeller",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "listedId", "type": "uint256" },
+          { "internalType": "string", "name": "artistId", "type": "string" },
+          { "internalType": "string", "name": "tokenURI", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "purchasingId",
+            "type": "uint256"
+          },
+          { "internalType": "address", "name": "buyerAddr", "type": "address" },
+          {
+            "internalType": "uint256",
+            "name": "purchasingPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum NitrilityCommon.LicensingType",
+            "name": "licensingType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum NitrilityCommon.EventTypes",
+            "name": "eventType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum NitrilityCommon.MediaListingType",
+            "name": "mediaListingType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct NitrilitySync.MediaPurchasingData[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "purchasingId", "type": "uint256" }
+    ],
+    "name": "getTokenURI",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "buyerAddr", "type": "address" },
+          { "internalType": "string", "name": "newTokenURI", "type": "string" },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "tokenURI",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "artistId",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "listedId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "enum NitrilityCommon.ListingType",
+                "name": "listingFormatValue",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "fPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "sPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalSupply",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "infiniteSupply",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "infiniteDuration",
+                "type": "bool"
+              },
+              {
+                "internalType": "enum NitrilityCommon.LicensingType",
+                "name": "licensingType",
+                "type": "uint8"
+              },
+              {
+                "internalType": "enum NitrilityCommon.MediaListingType",
+                "name": "mediaListingType",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "startTime",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "endTime",
+                "type": "uint256"
+              },
+              { "internalType": "bytes", "name": "signature", "type": "bytes" }
+            ],
+            "internalType": "struct NitrilityCommon.License",
+            "name": "license",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "artistId",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "artistName",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "percentage",
+                "type": "uint256"
+              },
+              { "internalType": "bool", "name": "isAdmin", "type": "bool" },
+              {
+                "internalType": "enum NitrilityCommon.ReviewStatus",
+                "name": "status",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct NitrilityCommon.ArtistRevenue[]",
+            "name": "artistRevenues",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              { "internalType": "string", "name": "name", "type": "string" },
+              { "internalType": "string", "name": "code", "type": "string" },
+              {
+                "internalType": "enum NitrilityCommon.DiscountType",
+                "name": "discountType",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "percentage",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "fixedAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "isValidOption",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "endTime",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct NitrilityCommon.DiscountCode[]",
+            "name": "discountCodes",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct NitrilitySync.LicensesData[]",
+        "name": "licensesData",
+        "type": "tuple[]"
+      },
+      { "internalType": "string", "name": "discountCode", "type": "string" }
+    ],
+    "name": "purchaseCreator",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "tokenURI", "type": "string" },
+          { "internalType": "string", "name": "artistId", "type": "string" },
+          { "internalType": "uint256", "name": "listedId", "type": "uint256" },
+          {
+            "internalType": "enum NitrilityCommon.ListingType",
+            "name": "listingFormatValue",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "fPrice", "type": "uint256" },
+          { "internalType": "uint256", "name": "sPrice", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "totalSupply",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "infiniteSupply", "type": "bool" },
+          {
+            "internalType": "bool",
+            "name": "infiniteDuration",
+            "type": "bool"
+          },
+          {
+            "internalType": "enum NitrilityCommon.LicensingType",
+            "name": "licensingType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum NitrilityCommon.MediaListingType",
+            "name": "mediaListingType",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
+        ],
+        "internalType": "struct NitrilityCommon.License",
+        "name": "license",
+        "type": "tuple"
+      },
+      { "internalType": "string", "name": "tokenURI", "type": "string" },
+      {
+        "internalType": "enum NitrilityCommon.MediaListingType",
+        "name": "mediaListingType",
+        "type": "uint8"
+      },
+      { "internalType": "address", "name": "buyerAddr", "type": "address" }
+    ],
+    "name": "purchaseMedia",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "mediaPurchasingId",
+        "type": "uint256"
+      }
+    ],
+    "name": "rejectMediaPurchasing",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "mediaPurchasingId",
+        "type": "uint256"
+      }
+    ],
+    "name": "removeMediaPurchasing",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "nitrilityFactory",
+        "type": "address"
+      }
+    ],
+    "name": "setFactory",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

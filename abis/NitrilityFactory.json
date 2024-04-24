@@ -1,0 +1,518 @@
+[
+  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "OwnableInvalidOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  { "inputs": [], "name": "ReentrancyGuardReentrantCall", "type": "error" },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "artistId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "collectionAddr",
+        "type": "address"
+      }
+    ],
+    "name": "CollectionCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "Licenseburnt",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "Licensetransfer",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "buyerAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "listedId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "tokenURI",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "artistId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum NitrilityCommon.LicensingType",
+        "name": "licensingType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum NitrilityCommon.EventTypes",
+        "name": "eventType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum NitrilityCommon.MediaListingType",
+        "name": "mediaListingType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "copies",
+        "type": "uint256"
+      }
+    ],
+    "name": "SoldLicenseEvent",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "_auctionAddr",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_marketOwner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_syncAddr",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "artistId", "type": "string" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+    ],
+    "name": "burnSoldLicense",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "_bytes32", "type": "bytes32" }
+    ],
+    "name": "bytes32ToString",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+      { "internalType": "address", "name": "from", "type": "address" },
+      { "internalType": "address", "name": "to", "type": "address" }
+    ],
+    "name": "emitLicenseTransfer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "artistId", "type": "string" }
+    ],
+    "name": "fetchArtistAddressForArtistId",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "artistId", "type": "string" }
+    ],
+    "name": "fetchBalanceOfArtist",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "artistId", "type": "string" }
+    ],
+    "name": "fetchCollectionAddressOfArtist",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getChainID",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "buyerAddr", "type": "address" },
+      { "internalType": "string", "name": "newTokenURI", "type": "string" },
+      {
+        "components": [
+          { "internalType": "string", "name": "tokenURI", "type": "string" },
+          { "internalType": "string", "name": "artistId", "type": "string" },
+          { "internalType": "uint256", "name": "listedId", "type": "uint256" },
+          {
+            "internalType": "enum NitrilityCommon.ListingType",
+            "name": "listingFormatValue",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "fPrice", "type": "uint256" },
+          { "internalType": "uint256", "name": "sPrice", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "totalSupply",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "infiniteSupply", "type": "bool" },
+          {
+            "internalType": "bool",
+            "name": "infiniteDuration",
+            "type": "bool"
+          },
+          {
+            "internalType": "enum NitrilityCommon.LicensingType",
+            "name": "licensingType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum NitrilityCommon.MediaListingType",
+            "name": "mediaListingType",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
+        ],
+        "internalType": "struct NitrilityCommon.License",
+        "name": "license",
+        "type": "tuple"
+      },
+      {
+        "internalType": "enum NitrilityCommon.EventTypes",
+        "name": "eventType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum NitrilityCommon.MediaListingType",
+        "name": "mediaListingType",
+        "type": "uint8"
+      },
+      { "internalType": "uint256", "name": "price", "type": "uint256" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "mintLicense",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nitriltiyRevenue",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "refunder", "type": "address" },
+      { "internalType": "uint256", "name": "offerPrice", "type": "uint256" }
+    ],
+    "name": "reFundOffer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "artistId", "type": "string" },
+          { "internalType": "string", "name": "artistName", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "percentage",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "isAdmin", "type": "bool" },
+          {
+            "internalType": "enum NitrilityCommon.ReviewStatus",
+            "name": "status",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct NitrilityCommon.ArtistRevenue[]",
+        "name": "artistRevenues",
+        "type": "tuple[]"
+      },
+      { "internalType": "uint256", "name": "revenue", "type": "uint256" }
+    ],
+    "name": "revenueSplits",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "receiver", "type": "address" },
+      { "internalType": "string", "name": "newTokenURI", "type": "string" },
+      {
+        "components": [
+          { "internalType": "string", "name": "tokenURI", "type": "string" },
+          { "internalType": "string", "name": "artistId", "type": "string" },
+          { "internalType": "uint256", "name": "listedId", "type": "uint256" },
+          {
+            "internalType": "enum NitrilityCommon.ListingType",
+            "name": "listingFormatValue",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "fPrice", "type": "uint256" },
+          { "internalType": "uint256", "name": "sPrice", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "totalSupply",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "infiniteSupply", "type": "bool" },
+          {
+            "internalType": "bool",
+            "name": "infiniteDuration",
+            "type": "bool"
+          },
+          {
+            "internalType": "enum NitrilityCommon.LicensingType",
+            "name": "licensingType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum NitrilityCommon.MediaListingType",
+            "name": "mediaListingType",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
+        ],
+        "internalType": "struct NitrilityCommon.License",
+        "name": "licenseData",
+        "type": "tuple"
+      },
+      {
+        "internalType": "enum NitrilityCommon.MediaListingType",
+        "name": "mediaListingType",
+        "type": "uint8"
+      },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "sendGift",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "artistId", "type": "string" },
+      { "internalType": "address", "name": "artistAddress", "type": "address" }
+    ],
+    "name": "setArtistAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "auctionAddr", "type": "address" }
+    ],
+    "name": "setAuctionAddr",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "marketOwner", "type": "address" }
+    ],
+    "name": "setMarketOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "syncAddr", "type": "address" }
+    ],
+    "name": "setSyncAddr",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "socialRevenue",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "string", "name": "str", "type": "string" }],
+    "name": "stringToBytes32",
+    "outputs": [
+      { "internalType": "bytes32", "name": "result", "type": "bytes32" }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "artistId", "type": "string" },
+      { "internalType": "address", "name": "receiver", "type": "address" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+    ],
+    "name": "transferLicense",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "artistId", "type": "string" }
+    ],
+    "name": "withdrawFund",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawMarketRevenue",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  { "stateMutability": "payable", "type": "receive" }
+]

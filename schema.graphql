@@ -1,0 +1,100 @@
+type CollectionCreated @entity(immutable: true) {
+  id: Bytes!
+  artistId: String! # string
+  collectionAddr: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Licenseburnt @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Licensetransfer @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  from: Bytes! # address
+  to: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SoldLicenseEvent @entity(immutable: true) {
+  id: Bytes!
+  buyerAddr: Bytes! # address
+  listedId: BigInt! # uint256
+  tokenId: BigInt! # uint256
+  tokenURI: String! # string
+  artistId: String! # string
+  price: BigInt! # uint256
+  licensingType: Int! # uint8
+  eventType: Int! # uint8
+  mediaListingType: Int! # uint8
+  copies: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+type OfferEvent @entity(immutable: true) {
+  id: Bytes!
+  offerId: BigInt! # uint256
+  buyerAddr: Bytes! # address
+  listedId: BigInt! # uint256
+  offerPrice: BigInt! # uint256
+  offerTime: BigInt! # uint256
+  tokenURI: String! # string
+  eventType: Int! # uint8
+  licensingType: Int! # uint8
+  mediaListingType: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NitrilityAuctionOwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+type MediaSyncLicenseEvent @entity(immutable: true) {
+  id: Bytes!
+  listedId: BigInt! # uint256
+  artistId: String! # string
+  tokenURI: String! # string
+  purchasingId: BigInt! # uint256
+  buyerAddr: Bytes! # address
+  purchasingPrice: BigInt! # uint256
+  licensingType: Int! # uint8
+  eventType: Int! # uint8
+  mediaListingType: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NitrilitySyncOwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

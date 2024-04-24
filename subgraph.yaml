@@ -1,0 +1,84 @@
+specVersion: 0.0.4
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: NitrilityFactory
+    network: arbitrum-one
+    source:
+      address: "0xC944B1ACFC9839e82F5792e3D637cB6917426c0B"
+      abi: NitrilityFactory
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - CollectionCreated
+        - Licenseburnt
+        - Licensetransfer
+        - OwnershipTransferred
+        - SoldLicenseEvent
+      abis:
+        - name: NitrilityFactory
+          file: ./abis/NitrilityFactory.json
+      eventHandlers:
+        - event: CollectionCreated(string,address)
+          handler: handleCollectionCreated
+        - event: Licenseburnt(uint256)
+          handler: handleLicenseburnt
+        - event: Licensetransfer(uint256,address,address)
+          handler: handleLicensetransfer
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: SoldLicenseEvent(address,uint256,uint256,string,string,uint256,uint8,uint8,uint8,uint256)
+          handler: handleSoldLicenseEvent
+      file: ./src/nitrility-factory.ts
+  - kind: ethereum
+    name: NitrilityAuction
+    network: arbitrum-one
+    source:
+      address: "0xcd3ac8BA93855538B631DCbdCB0f64dd64A137fc"
+      abi: NitrilityAuction
+      startBlock: 203669744
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - OfferEvent
+        - NitrilityAuctionOwnershipTransferred
+      abis:
+        - name: NitrilityAuction
+          file: ./abis/NitrilityAuction.json
+      eventHandlers:
+        - event: OfferEvent(uint256,address,uint256,uint256,uint256,string,uint8,uint8,uint8)
+          handler: handleOfferEvent
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/nitrility-auction.ts
+  - kind: ethereum
+    name: NitrilitySync
+    network: arbitrum-one
+    source:
+      address: "0xF5986d814476C3373723193711529F6f149ccEAa"
+      abi: NitrilitySync
+      startBlock: 203669856
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - MediaSyncLicenseEvent
+        - NitrilitySyncOwnershipTransferred
+      abis:
+        - name: NitrilitySync
+          file: ./abis/NitrilitySync.json
+      eventHandlers:
+        - event: MediaSyncLicenseEvent(uint256,string,string,uint256,address,uint256,uint8,uint8,uint8)
+          handler: handleMediaSyncLicenseEvent
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/nitrility-sync.ts
